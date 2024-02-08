@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en-us" translate="no">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="content-language" content="en-us">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#209CEE">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-title" content="Web Dice">
+	<title>Web Dice</title>
+	<link rel="icon" sizes="192x192" href="img/favicon/192x192.png">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="img/favicon/192x192.png">
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script src="bundle.js"></script>
+	<style type="text/tailwindcss">
+		@layer components {
+			.output {
+				@apply p-4 text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300;
+			}
+			.input-large {
+				@apply block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
+			}
+			.input-small {
+				@apply block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
+			}
+			.btn-gray {
+				@apply text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-base px-5 py-2.5 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700
+			}
+			.btn-blue {
+				@apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800;
+			}
+			.btn-green {
+				@apply focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-base px-5 py-2.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800;
+			}
+			.btn-yellow {
+				@apply focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-base px-5 py-2.5 dark:focus:ring-yellow-900;
+			}
+			.btn-red {
+				@apply focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900;
+			}
+		}
+	</style>
+	<style>
+		.output::after {
+			content: ' ';
+			display: inline-block;
+			visibility: hidden;
+			pointer-events: none;
+			user-select: none;
+			z-index: -1;
+		}
+	</style>
+</head>
+<body class="dark:bg-gray-900">
+	<div class="container font-sans max-w-md mx-auto p-4">
+
+		<form class="mb-4" autocomplete="off">
+				<input autocomplete="false" name="hidden" type="text" style="display :none;">
+				<input type="text" id="input" name="input" class="input-large">
+		</form>
+
+		<div class="mb-4">
+			<output id="output" name="output" for="input" class="output block font-mono w-full"></output>
+		</div>
+
+		<div class="grid grid-cols-4 gap-3">
+			<button type="button" class="btn-blue" data-append="d%">d%</button>
+			<button type="button" class="btn-blue" data-append="d">dX</button>
+			<button type="button" class="btn-red" data-action="delete">del</button>
+			<button type="button" class="btn-red" data-action="clear">C</button>
+
+			<button type="button" class="btn-blue" data-append="d4">d4</button>
+			<button type="button" class="btn-blue" data-append="d6">d6</button>
+			<button type="button" class="btn-blue" data-append="d8">d8</button>
+			<button type="button" class="btn-yellow" data-append="÷">÷</button>
+
+			<button type="button" class="btn-blue" data-append="d10">d10</button>
+			<button type="button" class="btn-blue" data-append="d12">d12</button>
+			<button type="button" class="btn-blue" data-append="d20">d20</button>
+			<button type="button" class="btn-yellow" data-append="×">×</button>
+
+			<button type="button" class="btn-gray" data-append="7">7</button>
+			<button type="button" class="btn-gray" data-append="8">8</button>
+			<button type="button" class="btn-gray" data-append="9">9</button>
+			<button type="button" class="btn-yellow" data-append="-">-</button>
+
+			<button type="button" class="btn-gray" data-append="4">4</button>
+			<button type="button" class="btn-gray" data-append="5">5</button>
+			<button type="button" class="btn-gray" data-append="6">6</button>
+			<button type="button" class="btn-yellow" data-append="+">+</button>
+
+			<button type="button" class="btn-gray" data-append="1">1</button>
+			<button type="button" class="btn-gray" data-append="2">2</button>
+			<button type="button" class="btn-gray" data-append="3">3</button>
+			<button type="button" class="btn-green row-span-2" data-action="calculate">=</button>
+
+			<button type="button" class="btn-gray" data-append="0">0</button>
+			<button type="button" class="btn-gray" data-append="(">(</button>
+			<button type="button" class="btn-gray" data-append=")">)</button>
+		</div>
+
+	</div>
+</body>
+</html>
