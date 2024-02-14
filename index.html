@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-us" translate="no">
+<html lang="en-us" translate="no" class="dark:bg-gray-900 dark:text-white">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="content-language" content="en-us">
@@ -9,8 +9,10 @@
 	<meta name="apple-mobile-web-app-title" content="Web Dice">
 	<title>Web Dice</title>
 	<link rel="icon" sizes="192x192" href="img/favicon/192x192.png">
-	<link rel="icon" href="favicon.ico" type="image/x-icon">
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="img/favicon/192x192.png">
+	<link rel="shortcut icon" href="img/favicon/192x192.png">
+	<!--<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">-->
 	<link rel="apple-touch-icon" href="img/favicon/192x192.png">
 	<script src="https://cdn.tailwindcss.com"></script>
 	<script src="bundle.js"></script>
@@ -19,8 +21,17 @@
 			.output {
 				@apply p-4 text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300;
 			}
+			.select {
+				@apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
+			}
+			.select-large {
+				@apply bg-gray-50 border border-gray-300 text-transparent w-16 sm:text-base rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block p-4 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500;
+			}
+			.select-large option {
+				@apply text-gray-900 dark:text-white;
+			}
 			.input-large {
-				@apply block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
+				@apply block w-full p-4 text-gray-900 border border-gray-300 rounded-r-lg bg-gray-50 sm:text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
 			}
 			.input-small {
 				@apply block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
@@ -40,6 +51,9 @@
 			.btn-red {
 				@apply focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900;
 			}
+			.select-icon {
+				@apply flex items-center justify-center absolute top-0 w-full h-full pointer-events-none select-none touch-none;
+			}
 		}
 	</style>
 	<style>
@@ -53,12 +67,21 @@
 		}
 	</style>
 </head>
-<body class="dark:bg-gray-900">
+<body>
 	<div class="container font-sans max-w-md mx-auto p-4">
 
-		<form class="mb-4" autocomplete="off">
-				<input autocomplete="false" name="hidden" type="text" style="display :none;">
+		<form class="relative mb-4" autocomplete="off">
+			<input autocomplete="false" name="hidden" type="text" style="display: none;">
+			<div class="flex">
+				<div class="relative">
+					<select id="select" class="select-large w-16 h-full pl-3">
+						<option value="N/A">None&nbsp;&nbsp;&nbsp;&nbsp;</option>
+						<option value="SR5">Shadowrun 5&nbsp;&nbsp;&nbsp;&nbsp;</option>
+					</select>
+					<div id="select-icon" class="select-icon">N/A</div>
+				</div>
 				<input type="text" id="input" name="input" class="input-large">
+			</div>
 		</form>
 
 		<div class="mb-4">

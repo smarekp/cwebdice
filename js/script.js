@@ -3,6 +3,13 @@ const roller = new DiceRoller();
 
 document.addEventListener('DOMContentLoaded', function(event) {
 
+	document.getElementById('select').addEventListener('change', function(event) {
+		var icon = document.getElementById('select-icon');
+		var value = event.srcElement.value;
+		icon.className = 'select-icon icon-' + value;
+		icon.innerHTML = value;
+	});
+
 	document.querySelectorAll('[data-append]').forEach(function(element, index, list) {
 		element.addEventListener('click', function(event) {
 			var input = document.getElementById('input');

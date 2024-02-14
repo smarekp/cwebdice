@@ -9,7 +9,6 @@
   "author": "Marek",
   "license": "MIT",
   "dependencies": {
-    "@dice-roller/rpg-dice-roller": "^5.5.0",
-    "dice-notation-js": "^1.0.3"
+    "@dice-roller/rpg-dice-roller": "^5.5.0"
   }
 }
